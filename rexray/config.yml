@@ -1,0 +1,19 @@
+rexray:
+  storageDrivers:
+  - ec2
+  logLevel: info
+  volume:
+    remove:
+      disable: true
+    create:
+      disable: false
+    mount:
+      preempt: true
+    unmount:
+      ignoreUsedCount: true
+    path:
+      disableCache: true
+linux:
+  volume:
+    rootPath: /data
+    fileMode: 0700
