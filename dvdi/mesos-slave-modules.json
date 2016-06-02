@@ -1,0 +1,48 @@
+{
+  "libraries": [
+    {
+      "modules": [
+        {
+          "parameters": [
+            {
+              "value": "/opt/mesosphere/active/mesos/libexec/mesos/",
+              "key": "launcher_dir"
+            },
+            {
+              "value": "2MB",
+              "key": "max_stdout_size"
+            },
+            {
+              "value": "rotate 9",
+              "key": "logrotate_stdout_options"
+            },
+            {
+              "value": "2MB",
+              "key": "max_stderr_size"
+            },
+            {
+              "value": "rotate 9",
+              "key": "logrotate_stderr_options"
+            }
+          ],
+          "name": "org_apache_mesos_LogrotateContainerLogger"
+        }
+      ],
+      "file": "/opt/mesosphere/lib/liblogrotate_container_logger.so"
+    },
+    {
+      "file": "/home/core/dvdi/libmesos_dvdi_isolator-0.28.1.so",
+      "modules": [
+        {
+          "name": "com_emccode_mesos_DockerVolumeDriverIsolator",
+          "parameters": [
+            {
+              "key": "isolator_command",
+              "value": "/emc/dvdi_isolator"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
