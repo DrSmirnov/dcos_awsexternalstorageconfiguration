@@ -21,6 +21,7 @@ curl -L -o /home/core/dvdi/libmesos_dvdi_isolator-0.28.1.so https://github.com/e
 #Preparing neccesary resource files 
 mkdir /home/core/resources
 curl -L -o /home/core/resources/mesos-slave-modules.json https://raw.githubusercontent.com/DrSmirnov/dcos_awsexternalstorageconfiguration/master/dvdi/mesos-slave-modules.json
+curl -L -o /home/core/resources/mesos-slave-common https://raw.githubusercontent.com/DrSmirnov/dcos_awsexternalstorageconfiguration/master/dvdi/mesos-slave-common
 
 #Backup existing files for debugging purposes
 mkdir /home/core/backup
@@ -29,4 +30,6 @@ cp /opt/mesosphere/etc/mesos-slave-common /home/core/backup/mesos-slave-common
 
 #Apply neccesary changes to dcos configuration
 sudo cp /home/core/resources/mesos-slave-modules.json /opt/mesosphere/etc/mesos-slave-modules.json
-sed 's$MESOS_ISOLATION.*$MESOS_ISOLATION=cgroups/cpu,cgroups/mem,posix/disk,com_emccode_mesos_DockerVolumeDriverIsolator$' /opt/mesosphere/etc/mesos-slave-common | sudo tee /opt/mesosphere/etc/mesos-slave-common
+sudo cp /home/core/resources/mesos-slave-common /opt/mesosphere/etc/mesos-slave-modules.json
+
+#sed 's$MESOS_ISOLATION.*$MESOS_ISOLATION=cgroups/cpu,cgroups/mem,posix/disk,com_emccode_mesos_DockerVolumeDriverIsolator$' /opt/mesosphere/etc/mesos-slave-common | sudo tee /opt/mesosphere/etc/mesos-slave-common
