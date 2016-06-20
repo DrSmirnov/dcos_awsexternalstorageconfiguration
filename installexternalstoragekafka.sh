@@ -36,4 +36,9 @@ sudo cp /home/core/resources/mesos-slave-common-public /opt/mesosphere/etc/mesos
 
 #apply additional kafka attribute to the kafka nodes
 echo "MESOS_ATTRIBUTES=usage:kafka;public_ip:true" | sudo tee -a /opt/mesosphere/etc/mesos-slave-public
+
+#restart dcos slave service to activete the changes
+mkdir /home/core/log
+sudo systemctl reload-or-restart dcos-marathon.service > /home/core/log/restart_public_slave.log
+
 #sed 's$MESOS_ATTRIBUTES.*$MESOS_ATTRIBUTES=usage:kafka;public_ip:true$' /opt/mesosphere/etc/mesos-slave-public | sudo tee /opt/mesosphere/etc/mesos-slave-public
