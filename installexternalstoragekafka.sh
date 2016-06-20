@@ -32,4 +32,5 @@ cp /opt/mesosphere/etc/mesos-slave-common /home/core/backup/mesos-slave-common
 sudo cp /home/core/resources/mesos-slave-modules.json /opt/mesosphere/etc/mesos-slave-modules.json
 sudo cp /home/core/resources/mesos-slave-common-kafka /opt/mesosphere/etc/mesos-slave-common
 
-#sed 's$MESOS_ISOLATION.*$MESOS_ISOLATION=cgroups/cpu,cgroups/mem,posix/disk,com_emccode_mesos_DockerVolumeDriverIsolator$' /opt/mesosphere/etc/mesos-slave-common | sudo tee /opt/mesosphere/etc/mesos-slave-common
+#apply additional kafka attribute to the kafka nodes
+sed 's$MESOS_ATTRIBUTES.*$MESOS_ATTRIBUTES=usage:kafka;public_ip:true$' /opt/mesosphere/etc/mesos-slave-public | sudo tee /opt/mesosphere/etc/mesos-slave-public
