@@ -27,10 +27,13 @@ curl -L -o /home/core/resources/mesos-slave-common-kafka https://raw.githubuserc
 mkdir /home/core/backup
 cp /opt/mesosphere/etc/mesos-slave-modules.json /home/core/backup/mesos-slave-modules.json
 cp /opt/mesosphere/etc/mesos-slave-common /home/core/backup/mesos-slave-common
+cp /opt/mesosphere/etc/mesos-slave-public /home/core/backup/mesos-slave-public
 
 #Apply neccesary changes to dcos configuration
 sudo cp /home/core/resources/mesos-slave-modules.json /opt/mesosphere/etc/mesos-slave-modules.json
 sudo cp /home/core/resources/mesos-slave-common-kafka /opt/mesosphere/etc/mesos-slave-common
+sudo cp /home/core/resources/mesos-slave-common-public /opt/mesosphere/etc/mesos-slave-public
 
 #apply additional kafka attribute to the kafka nodes
-sed 's$MESOS_ATTRIBUTES.*$MESOS_ATTRIBUTES=usage:kafka;public_ip:true$' /opt/mesosphere/etc/mesos-slave-public | sudo tee /opt/mesosphere/etc/mesos-slave-public
+echo "MESOS_ATTRIBUTES=usage:kafka;public_ip:true" | sudo tee -a /opt/mesosphere/etc/mesos-slave-public
+#sed 's$MESOS_ATTRIBUTES.*$MESOS_ATTRIBUTES=usage:kafka;public_ip:true$' /opt/mesosphere/etc/mesos-slave-public | sudo tee /opt/mesosphere/etc/mesos-slave-public
