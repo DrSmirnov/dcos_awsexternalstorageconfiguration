@@ -39,6 +39,7 @@ echo "MESOS_ATTRIBUTES=usage:kafka;public_ip:true" | sudo tee -a /opt/mesosphere
 
 #restart dcos slave service to activete the changes
 mkdir /home/core/log
+sudo rm -f /var/lib/mesos/slave/meta/slaves/latest
 sudo systemctl reload-or-restart dcos-mesos-slave-public.service > /home/core/log/restart_public_slave.log
 
 #sed 's$MESOS_ATTRIBUTES.*$MESOS_ATTRIBUTES=usage:kafka;public_ip:true$' /opt/mesosphere/etc/mesos-slave-public | sudo tee /opt/mesosphere/etc/mesos-slave-public
